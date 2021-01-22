@@ -1,0 +1,21 @@
+<quiz>
+    <title>Test quiz</title>
+    <questions>
+        <question>
+            <title>How much?</title>
+            <answers>
+                <answer>20</answer>
+                <answer>30</answer>
+                <answer>40</answer>
+            </answers>
+        </question>
+        <question>
+            <title>How many?</title>
+            <answers>
+                <answer>500</answer>
+                <answer>100</answer>
+                <answer>20</answer>
+            </answers>
+        </question>
+    </questions>
+</quiz>
