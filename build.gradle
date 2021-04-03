@@ -34,3 +34,21 @@ dependencies {
 test {
 	useJUnitPlatform()
 }
+
+task downloadDependencies(type: Copy) {
+
+	from sourceSets.main.compileClasspath,
+			sourceSets.main.runtimeClasspath,
+			sourceSets.test.compileClasspath,
+			sourceSets.test.runtimeClasspath
+	into 'deps/'
+
+	doFirst {
+		ant.delete(dir: 'deps')
+		ant.mkdir(dir: 'deps')
+	}
+
+	doLast {
+		ant.delete(dir: 'deps')
+	}
+}
