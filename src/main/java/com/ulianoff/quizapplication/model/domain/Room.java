@@ -1,8 +1,11 @@
 package com.ulianoff.quizapplication.model.domain;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -20,6 +23,23 @@ public class Room {
     @Column(name = "capacity")
     private Integer capacity;
 
-    @OneToMany(mappedBy = "room")
-    private Set<User> users;
+    @Column(name = "private")
+    private boolean privateRoom;
+
+    @Column(name = "code")
+    private String code;
+
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "room_user",
+            joinColumns = {@JoinColumn(name = "room_id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_id")}
+    )
+    private Set<User> users = new HashSet<>();
+
+    @OneToOne
+    @JoinColumn(name = "quiz_id")
+    private Quiz quiz;
 }

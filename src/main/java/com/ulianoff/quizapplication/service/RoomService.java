@@ -1,8 +1,12 @@
 package com.ulianoff.quizapplication.service;
 
+import com.ulianoff.quizapplication.model.dto.RoomDto;
 
-import com.ulianoff.quizapplication.model.domain.Room;
+public interface RoomService extends CommonService<RoomDto> {
 
-public interface RoomService extends CommonService<Room> {
+    RoomDto getRoomByCode(String code);
 
+    RoomDto addUserToRoom(RoomDto roomDto);
+
+    RoomDto addQuizToRoom(RoomDto roomDto);
 }

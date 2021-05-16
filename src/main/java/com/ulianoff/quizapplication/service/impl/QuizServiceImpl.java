@@ -2,7 +2,9 @@ package com.ulianoff.quizapplication.service.impl;
 
 import com.ulianoff.quizapplication.dao.QuizRepository;
 import com.ulianoff.quizapplication.model.domain.Quiz;
+import com.ulianoff.quizapplication.model.dto.QuizDto;
 import com.ulianoff.quizapplication.service.QuizService;
+import com.ulianoff.quizapplication.service.converter.QuizConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,28 +17,34 @@ public class QuizServiceImpl implements QuizService {
 
     private final QuizRepository repository;
 
+    private final QuizConverter converter;
+
     @Override
-    public Quiz addEntity(Quiz quiz) {
-        return repository.save(quiz);
+    public QuizDto add(QuizDto quizDto) {
+        Quiz quiz = converter.quizDtoToQuiz(quizDto);
+        quiz.setQuestions(null);
+        repository.save(quiz);
+        quizDto.setId(String.valueOf(quiz.getId()));
+        return quizDto;
     }
 
     @Override
-    public Quiz getEntityById(Long id) {
-        return repository.findById(id).orElse(null);
+    public QuizDto getById(String id) {
+        return converter.quizToQuizDto(repository.findById(Long.parseLong(id)).orElse(null));
     }
 
     @Override
-    public List<Quiz> getAllEntities() {
+    public List<QuizDto> getAll() {
         return null;
     }
 
     @Override
-    public boolean deleteEntity(Quiz entity) {
+    public boolean delete(QuizDto entity) {
         return false;
     }
 
     @Override
-    public boolean deleteEntityById(Long id) {
+    public boolean deleteById(String id) {
         return false;
     }
 }

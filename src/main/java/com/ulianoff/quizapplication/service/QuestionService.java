@@ -1,7 +1,7 @@
 package com.ulianoff.quizapplication.service;
 
-import com.ulianoff.quizapplication.model.domain.Question;
+import com.ulianoff.quizapplication.model.dto.QuestionDto;
 
-public interface QuestionService extends CommonService<Question> {
+public interface QuestionService extends CommonService<QuestionDto> {
 
 }

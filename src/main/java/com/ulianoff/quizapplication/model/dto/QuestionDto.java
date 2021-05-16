@@ -8,9 +8,11 @@ import java.util.Set;
 @Data
 public class QuestionDto implements Serializable {
 
-    private Long id;
+    private String id;
 
     private String title;
+
+    private String quizId;
 
     private Set<AnswerDto> answers;
 }

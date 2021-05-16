@@ -1,8 +1,8 @@
 package com.ulianoff.quizapplication.service;
 
+import com.ulianoff.quizapplication.model.dto.UserDto;
 
-import com.ulianoff.quizapplication.model.domain.User;
+public interface UserService extends CommonService<UserDto> {
 
-public interface UserService extends CommonService<User> {
-
+    UserDto updateUser(UserDto user);
 }

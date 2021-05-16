@@ -12,27 +12,27 @@ import java.util.List;
 public class CategoryServiceImpl implements CategoryService {
 
     @Override
-    public Category addEntity(Category entity) {
+    public Category add(Category entity) {
         return null;
     }
 
     @Override
-    public Category getEntityById(Long id) {
+    public Category getById(String id) {
         return null;
     }
 
     @Override
-    public List<Category> getAllEntities() {
+    public List<Category> getAll() {
         return null;
     }
 
     @Override
-    public boolean deleteEntity(Category category) {
+    public boolean delete(Category category) {
         return false;
     }
 
     @Override
-    public boolean deleteEntityById(Long id) {
+    public boolean deleteById(String id) {
         return false;
     }
 }

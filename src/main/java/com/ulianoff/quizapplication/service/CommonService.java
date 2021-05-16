@@ -3,13 +3,14 @@ package com.ulianoff.quizapplication.service;
 import java.util.List;
 
 public interface CommonService<T> {
-    T addEntity(T entity);
 
-    T getEntityById(Long id);
+    T add(T entity);
 
-    List<T> getAllEntities();
+    T getById(String id);
 
-    boolean deleteEntity(T entity);
+    List<T> getAll();
 
-    boolean deleteEntityById(Long id);
+    boolean delete(T entity);
+
+    boolean deleteById(String id);
 }

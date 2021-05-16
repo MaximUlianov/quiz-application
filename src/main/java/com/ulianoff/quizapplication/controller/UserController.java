@@ -1,12 +1,12 @@
 package com.ulianoff.quizapplication.controller;
 
 import com.ulianoff.quizapplication.facade.UserFacade;
+import com.ulianoff.quizapplication.model.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/users")
@@ -16,11 +16,21 @@ public class UserController {
 
     private final UserFacade userFacade;
 
-    @GetMapping("/get")
-    public ResponseEntity<?> getRequest() {
-        //userService.addUser();
-        log.debug("user added");
-        return ResponseEntity.ok("added");
+    @GetMapping
+    public List<UserDto> getAllUsers() {
+        log.info(">>> get all users");
+        return userFacade.getAllUsers();
     }
 
+    @GetMapping("/{id}")
+    public UserDto getUserById(@PathVariable("id") String id) {
+        log.info(">>> requesting user by id: {}", id);
+        return userFacade.getUserById(id);
+    }
+
+    @PostMapping
+    public UserDto createUser(@RequestBody UserDto userDto) {
+        log.info(">>> creating user with username: {}", userDto.getUsername());
+        return userFacade.createUser(userDto);
+    }
 }

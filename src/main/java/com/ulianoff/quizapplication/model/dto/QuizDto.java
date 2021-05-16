@@ -8,7 +8,7 @@ import java.util.Set;
 @Data
 public class QuizDto implements Serializable {
 
-    private Long id;
+    private String id;
 
     private String title;
 

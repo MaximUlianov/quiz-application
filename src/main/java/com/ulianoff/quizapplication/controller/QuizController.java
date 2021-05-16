@@ -5,7 +5,6 @@ import com.ulianoff.quizapplication.model.dto.QuizDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,12 +17,14 @@ public class QuizController {
 
     @GetMapping
     public QuizDto getQuiz(@RequestParam("id") String id) {
+
         log.debug(">>> get Quiz by id {}", id);
-        return quizFacade.getQuizById(Long.parseLong(id));
+        return quizFacade.getQuizById(id);
     }
 
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public Long createQuiz(@RequestBody QuizDto quizDto) {
+    public QuizDto createQuiz(@RequestBody QuizDto quizDto) {
+
         return quizFacade.addQuiz(quizDto);
     }
 

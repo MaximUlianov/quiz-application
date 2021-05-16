@@ -7,7 +7,9 @@ import java.io.Serializable;
 @Data
 public class AnswerDto implements Serializable {
 
-    private Long id;
+    private String id;
+
+    private String questionId;
 
     private String text;
 }
