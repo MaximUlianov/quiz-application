@@ -1,9 +1,10 @@
 package com.ulianoff.quizapplication.controller;
 
-import com.ulianoff.quizapplication.facade.UserFacade;
 import com.ulianoff.quizapplication.model.dto.UserDto;
+import com.ulianoff.quizapplication.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,23 +15,31 @@ import java.util.List;
 @Slf4j
 public class UserController {
 
-    private final UserFacade userFacade;
+    private final UserService userService;
 
     @GetMapping
     public List<UserDto> getAllUsers() {
-        log.info(">>> get all users");
-        return userFacade.getAllUsers();
+
+        return userService.getAll();
     }
 
     @GetMapping("/{id}")
     public UserDto getUserById(@PathVariable("id") String id) {
-        log.info(">>> requesting user by id: {}", id);
-        return userFacade.getUserById(id);
+
+        return userService.getById(id);
     }
 
     @PostMapping
     public UserDto createUser(@RequestBody UserDto userDto) {
+
         log.info(">>> creating user with username: {}", userDto.getUsername());
-        return userFacade.createUser(userDto);
+        return userService.save(userDto);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable("id") String id) {
+
+        userService.deleteById(id);
+        return ResponseEntity.accepted().build();
     }
 }

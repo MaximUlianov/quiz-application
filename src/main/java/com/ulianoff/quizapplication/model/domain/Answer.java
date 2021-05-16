@@ -16,6 +16,9 @@ public class Answer {
     @Column(name = "text")
     private String text;
 
+    @Column(name = "correct_answer")
+    private boolean correct;
+
     @ManyToOne
     @JoinColumn(name = "question_id")
     private Question question;

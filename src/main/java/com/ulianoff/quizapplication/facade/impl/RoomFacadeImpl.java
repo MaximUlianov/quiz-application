@@ -2,7 +2,7 @@ package com.ulianoff.quizapplication.facade.impl;
 
 import com.ulianoff.quizapplication.facade.RoomFacade;
 import com.ulianoff.quizapplication.model.dto.RoomDto;
-import com.ulianoff.quizapplication.service.RoomService;
+import com.ulianoff.quizapplication.service.room.RoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +31,7 @@ public class RoomFacadeImpl implements RoomFacade {
     @Transactional
     public RoomDto createRoom(RoomDto roomDto) {
 
-        roomService.add(roomDto);
+        roomService.save(roomDto);
 
         return addUserToRoom(roomDto);
     }
@@ -42,11 +42,5 @@ public class RoomFacadeImpl implements RoomFacade {
         roomService.addUserToRoom(roomDto);
 
         return roomDto;
-    }
-
-    @Override
-    public RoomDto addQuizToRoom(RoomDto roomDto) {
-
-        return roomService.addQuizToRoom(roomDto);
     }
 }

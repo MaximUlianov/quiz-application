@@ -1,11 +1,9 @@
-package com.ulianoff.quizapplication.service.impl;
+package com.ulianoff.quizapplication.service.question;
 
 import com.ulianoff.quizapplication.dao.QuestionRepository;
 import com.ulianoff.quizapplication.model.domain.Question;
 import com.ulianoff.quizapplication.model.domain.Quiz;
 import com.ulianoff.quizapplication.model.dto.QuestionDto;
-import com.ulianoff.quizapplication.service.QuestionService;
-import com.ulianoff.quizapplication.service.QuizService;
 import com.ulianoff.quizapplication.service.converter.QuestionConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,7 +19,7 @@ public class QuestionServiceImpl implements QuestionService {
     private final QuestionConverter converter;
 
     @Override
-    public QuestionDto add(QuestionDto questionDto) {
+    public QuestionDto save(QuestionDto questionDto) {
 
         Question question = converter.questionDtoToQuestion(questionDto);
 

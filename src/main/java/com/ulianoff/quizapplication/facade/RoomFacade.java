@@ -13,6 +13,4 @@ public interface RoomFacade {
     RoomDto createRoom(RoomDto roomDto);
 
     RoomDto addUserToRoom(RoomDto roomDto);
-
-    RoomDto addQuizToRoom(RoomDto roomDto);
 }

@@ -38,8 +38,4 @@ public class Room {
             inverseJoinColumns = {@JoinColumn(name = "user_id")}
     )
     private Set<User> users = new HashSet<>();
-
-    @OneToOne
-    @JoinColumn(name = "quiz_id")
-    private Quiz quiz;
 }

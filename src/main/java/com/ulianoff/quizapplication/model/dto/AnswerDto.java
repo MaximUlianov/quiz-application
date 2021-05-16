@@ -12,4 +12,6 @@ public class AnswerDto implements Serializable {
     private String questionId;
 
     private String text;
+
+    private Boolean correct;
 }

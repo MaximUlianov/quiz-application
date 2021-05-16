@@ -1,9 +1,8 @@
-package com.ulianoff.quizapplication.service.impl;
+package com.ulianoff.quizapplication.service.user;
 
 import com.ulianoff.quizapplication.dao.UserRepository;
 import com.ulianoff.quizapplication.model.domain.User;
 import com.ulianoff.quizapplication.model.dto.UserDto;
-import com.ulianoff.quizapplication.service.UserService;
 import com.ulianoff.quizapplication.service.converter.UserConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,7 +18,7 @@ public class UserServiceImpl implements UserService {
     private final UserConverter converter;
 
     @Override
-    public UserDto add(UserDto userDto) {
+    public UserDto save(UserDto userDto) {
 
         User user = converter.userDtoToUser(userDto);
         repository.save(user);

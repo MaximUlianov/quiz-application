@@ -1,9 +1,10 @@
 package com.ulianoff.quizapplication.controller;
 
-import com.ulianoff.quizapplication.facade.RoomFacade;
 import com.ulianoff.quizapplication.model.dto.RoomDto;
+import com.ulianoff.quizapplication.service.room.RoomService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -15,40 +16,40 @@ import java.util.List;
 @Slf4j
 public class RoomController {
 
-    private final RoomFacade roomFacade;
+    private final RoomService service;
 
     @GetMapping("/{code}")
     public RoomDto getRoomByCode(@PathVariable("code") String code) {
 
-        log.info(">>> requesting room with code: {}", code);
-        return roomFacade.getRoomByCode(code);
+        log.debug(">>> requesting room with code: {}", code);
+        return service.getRoomByCode(code);
     }
 
     @GetMapping
     public List<RoomDto> getAllRooms() {
 
-        return roomFacade.getAllRooms();
+        return service.getAll();
     }
 
     @PostMapping
     public RoomDto createRoom(@Valid @RequestBody RoomDto roomDto) {
 
-        log.info(">>> creating {} room with name {}",
+        log.debug(">>> creating {} room with name {}",
                 roomDto.isPrivateRoom() ? "private" : "public", roomDto.getName());
-        return roomFacade.createRoom(roomDto);
+        return service.save(roomDto);
     }
 
     @PatchMapping
     public RoomDto addUserToRoom(@RequestBody RoomDto roomDto) {
 
         log.info(">>> adding user with id {} to room with code {}", roomDto.getUserId(), roomDto.getCode());
-        return roomFacade.addUserToRoom(roomDto);
+        return service.addUserToRoom(roomDto);
     }
 
-    @PatchMapping("/quiz")
-    public RoomDto addQuizToRoom(@RequestBody RoomDto roomDto) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteRoom(@PathVariable("id") String id) {
 
-        log.info(">>> adding quiz with id {} to room with code {}", roomDto.getQuizId(), roomDto.getCode());
-        return roomFacade.addQuizToRoom(roomDto);
+        service.deleteById(id);
+        return ResponseEntity.accepted().build();
     }
 }

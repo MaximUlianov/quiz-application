@@ -1,10 +1,10 @@
-package com.ulianoff.quizapplication.service;
+package com.ulianoff.quizapplication.service.common;
 
 import java.util.List;
 
 public interface CommonService<T> {
 
-    T add(T entity);
+    T save(T entity);
 
     T getById(String id);
 

@@ -1,10 +1,10 @@
-package com.ulianoff.quizapplication.service.impl;
+package com.ulianoff.quizapplication.service.answer;
 
 import com.ulianoff.quizapplication.dao.AnswerRepository;
 import com.ulianoff.quizapplication.model.domain.Answer;
 import com.ulianoff.quizapplication.model.domain.Question;
 import com.ulianoff.quizapplication.model.dto.AnswerDto;
-import com.ulianoff.quizapplication.service.AnswerService;
+import com.ulianoff.quizapplication.service.answer.AnswerService;
 import com.ulianoff.quizapplication.service.converter.AnswerConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,12 +15,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AnswerServiceImpl implements AnswerService {
 
-    private final AnswerRepository repository;
+    private final AnswerRepository answerRepository;
 
     private final AnswerConverter converter;
 
     @Override
-    public AnswerDto add(AnswerDto answerDto) {
+    public AnswerDto save(AnswerDto answerDto) {
 
         Answer answer = converter.answerDtoToAnswer(answerDto);
 
@@ -28,7 +28,7 @@ public class AnswerServiceImpl implements AnswerService {
         question.setId(Long.parseLong(answerDto.getQuestionId()));
 
         answer.setQuestion(question);
-        repository.save(answer);
+        answerRepository.save(answer);
 
         answerDto.setId(String.valueOf(answer.getId()));
 

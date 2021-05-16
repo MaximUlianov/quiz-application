@@ -1,11 +1,9 @@
-package com.ulianoff.quizapplication.service.impl;
+package com.ulianoff.quizapplication.service.room;
 
 import com.ulianoff.quizapplication.dao.RoomRepository;
-import com.ulianoff.quizapplication.model.domain.Quiz;
 import com.ulianoff.quizapplication.model.domain.Room;
 import com.ulianoff.quizapplication.model.domain.User;
 import com.ulianoff.quizapplication.model.dto.RoomDto;
-import com.ulianoff.quizapplication.service.RoomService;
 import com.ulianoff.quizapplication.service.converter.RoomConverter;
 import com.ulianoff.quizapplication.util.RandomUtil;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +21,7 @@ public class RoomServiceImpl implements RoomService {
     private final RoomConverter converter;
 
     @Override
-    public RoomDto add(RoomDto roomDto) {
+    public RoomDto save(RoomDto roomDto) {
 
         Room room = converter.roomDtoToRoom(roomDto);
         room.setUsers(new HashSet<>());
@@ -79,19 +77,6 @@ public class RoomServiceImpl implements RoomService {
         room.getUsers().add(user);
 
         roomRepository.save(room);
-        return roomDto;
-    }
-
-    @Override
-    public RoomDto addQuizToRoom(RoomDto roomDto) {
-
-        Room room = roomRepository.findByCode(roomDto.getCode()).orElseThrow();
-        Quiz quiz = new Quiz();
-        quiz.setId(Long.parseLong(roomDto.getQuizId()));
-        room.setQuiz(quiz);
-
-        roomRepository.save(room);
-
         return roomDto;
     }
 }
