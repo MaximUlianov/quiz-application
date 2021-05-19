@@ -33,7 +33,14 @@ public class UserController {
     public UserDto createUser(@RequestBody UserDto userDto) {
 
         log.info(">>> creating user with username: {}", userDto.getUsername());
-        return userService.save(userDto);
+        return userService.createUser(userDto);
+    }
+
+    @PostMapping("/admin")
+    public UserDto createAdminUser(@RequestBody UserDto userDto) {
+
+        log.info(">>> creating admin with username: {}", userDto.getUsername());
+        return userService.createAdminUser(userDto);
     }
 
     @DeleteMapping("/{id}")

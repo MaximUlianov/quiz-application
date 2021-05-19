@@ -27,4 +27,8 @@ public class User {
     @EqualsAndHashCode.Exclude
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
     private Set<Room> rooms = new HashSet<>();
+
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
 }

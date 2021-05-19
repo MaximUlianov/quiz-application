@@ -13,3 +13,6 @@ spring:
 quiz:
   correct-answer:
     points: 1
+
+server:
+  port: 9090
