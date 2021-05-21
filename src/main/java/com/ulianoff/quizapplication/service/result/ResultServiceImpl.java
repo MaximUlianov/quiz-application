@@ -23,10 +23,21 @@ public class ResultServiceImpl implements ResultService {
     @Override
     public List<ResultDto> getAllGameSessionResults(String gameSessionId) {
 
-        List<UserAnswer> userAnswers = userAnswerRepository.findAllByGameSession_Id(Long.parseLong(gameSessionId));
+        List<UserAnswer> userAnswers = userAnswerRepository.findAllByQuizSession_Id(Long.parseLong(gameSessionId));
 
         return pointsCalculator.calculatePoints(userAnswers).entrySet().stream()
                 .map(it -> new ResultDto(it.getKey(), it.getValue()))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public ResultDto getUserResultByUserSessionId(String userSessionId) {
+
+        List<UserAnswer> userAnswers = userAnswerRepository.findAllByUserQuizSession_Id(Long.parseLong(userSessionId));
+
+        return pointsCalculator.calculatePoints(userAnswers).entrySet().stream()
+                .map(it -> new ResultDto(it.getKey(), it.getValue()))
+                .findFirst()
+                .orElseThrow();
     }
 }

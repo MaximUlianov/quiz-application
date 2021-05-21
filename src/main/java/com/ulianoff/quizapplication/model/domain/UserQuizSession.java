@@ -7,8 +7,8 @@ import java.time.LocalDateTime;
 
 @Entity
 @Data
-@Table(name = "game_session", schema = "public")
-public class GameSession {
+@Table(name = "user_quiz_session", schema = "public")
+public class UserQuizSession {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,10 +21,10 @@ public class GameSession {
     private LocalDateTime endTimestamp;
 
     @ManyToOne
-    @JoinColumn(name = "room_id")
-    private Room room;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @ManyToOne
-    @JoinColumn(name = "quiz_id")
-    private Quiz quiz;
+    @JoinColumn(name = "quiz_session_id")
+    private QuizSession quizSession;
 }

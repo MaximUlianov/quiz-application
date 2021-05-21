@@ -28,7 +28,7 @@ public class RoomController {
     @GetMapping
     public List<RoomDto> getAllRooms() {
 
-        return service.getAll();
+        return service.getAllRooms();
     }
 
     @PostMapping
@@ -36,7 +36,7 @@ public class RoomController {
 
         log.debug(">>> creating {} room with name {}",
                 roomDto.isPrivateRoom() ? "private" : "public", roomDto.getName());
-        return service.save(roomDto);
+        return service.createRoom(roomDto);
     }
 
     @PatchMapping
@@ -49,7 +49,7 @@ public class RoomController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteRoom(@PathVariable("id") String id) {
 
-        service.deleteById(id);
+        service.deleteRoomById(id);
         return ResponseEntity.accepted().build();
     }
 }

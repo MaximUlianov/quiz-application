@@ -2,7 +2,7 @@ package com.ulianoff.quizapplication.model.enums;
 
 public enum RoleEnum {
 
-    ADMINISTRATOR,
+    ROLE_ADMINISTRATOR,
 
-    USER
+    ROLE_USER
 }

@@ -20,13 +20,13 @@ public class UserController {
     @GetMapping
     public List<UserDto> getAllUsers() {
 
-        return userService.getAll();
+        return userService.getAllUsers();
     }
 
     @GetMapping("/{id}")
     public UserDto getUserById(@PathVariable("id") String id) {
 
-        return userService.getById(id);
+        return userService.getUserById(id);
     }
 
     @PostMapping
@@ -46,7 +46,7 @@ public class UserController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable("id") String id) {
 
-        userService.deleteById(id);
+        userService.deleteUserById(id);
         return ResponseEntity.accepted().build();
     }
 }

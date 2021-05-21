@@ -14,12 +14,12 @@ public class UserAnswer {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "game_session_id")
-    private GameSession gameSession;
+    @JoinColumn(name = "quiz_session_id")
+    private QuizSession quizSession;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "user_quiz_session_id")
+    private UserQuizSession userQuizSession;
 
     @ManyToOne
     @JoinColumn(name = "quiz_id")

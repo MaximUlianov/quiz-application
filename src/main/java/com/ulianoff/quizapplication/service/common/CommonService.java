@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface CommonService<T> {
 
-    T save(T entity);
+    T createGameSession(T entity);
 
     T getById(String id);
 

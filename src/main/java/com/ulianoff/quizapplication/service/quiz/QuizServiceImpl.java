@@ -2,12 +2,14 @@ package com.ulianoff.quizapplication.service.quiz;
 
 import com.ulianoff.quizapplication.dao.QuizRepository;
 import com.ulianoff.quizapplication.model.domain.Quiz;
-import com.ulianoff.quizapplication.model.dto.QuizDto;
+import com.ulianoff.quizapplication.model.domain.User;
+import com.ulianoff.quizapplication.model.dto.quiz.QuizDto;
 import com.ulianoff.quizapplication.service.converter.QuizConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -19,31 +21,42 @@ public class QuizServiceImpl implements QuizService {
     private final QuizConverter converter;
 
     @Override
-    public QuizDto save(QuizDto quizDto) {
+    public QuizDto createQuiz(QuizDto quizDto) {
+
         Quiz quiz = converter.quizDtoToQuiz(quizDto);
         quiz.setQuestions(null);
+
+        User user = new User();
+        user.setId(Long.parseLong(quizDto.getUserCreatorId()));
+        quiz.setUser(user);
+
         repository.save(quiz);
         quizDto.setId(String.valueOf(quiz.getId()));
+
         return quizDto;
     }
 
     @Override
-    public QuizDto getById(String id) {
+    public QuizDto getQuizById(String id) {
+
         return converter.quizToQuizDto(repository.findById(Long.parseLong(id)).orElse(null));
     }
 
     @Override
-    public List<QuizDto> getAll() {
-        return null;
+    public List<QuizDto> getAllQuiz() {
+
+        return repository.findAll()
+                .stream()
+                .map(converter::quizToQuizDto)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public boolean delete(QuizDto entity) {
-        return false;
-    }
+    public List<QuizDto> getAllQuizByCreatorId(String creatorId) {
 
-    @Override
-    public boolean deleteById(String id) {
-        return false;
+        return repository.findAllByUser_Id(Long.parseLong(creatorId))
+                .stream()
+                .map(converter::quizToQuizDto)
+                .collect(Collectors.toList());
     }
 }

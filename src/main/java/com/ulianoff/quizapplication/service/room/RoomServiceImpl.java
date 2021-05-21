@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -21,7 +22,7 @@ public class RoomServiceImpl implements RoomService {
     private final RoomConverter converter;
 
     @Override
-    public RoomDto save(RoomDto roomDto) {
+    public RoomDto createRoom(RoomDto roomDto) {
 
         Room room = converter.roomDtoToRoom(roomDto);
         room.setUsers(new HashSet<>());
@@ -36,23 +37,17 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public RoomDto getById(String id) {
-        return null;
+    public List<RoomDto> getAllRooms() {
+        return roomRepository.findAll()
+                .stream()
+                .map(converter::roomToRoomDto)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public List<RoomDto> getAll() {
-        return null;
-    }
+    public void deleteRoomById(String id) {
 
-    @Override
-    public boolean delete(RoomDto entity) {
-        return false;
-    }
-
-    @Override
-    public boolean deleteById(String id) {
-        return false;
+        roomRepository.deleteById(Long.parseLong(id));
     }
 
     @Override

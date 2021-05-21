@@ -2,12 +2,10 @@ package com.ulianoff.quizapplication.service.user_answer;
 
 import com.ulianoff.quizapplication.dao.UserAnswerRepository;
 import com.ulianoff.quizapplication.model.domain.*;
-import com.ulianoff.quizapplication.model.dto.UserAnswerDto;
+import com.ulianoff.quizapplication.model.dto.quizsession.UserAnswerDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @Slf4j
@@ -17,17 +15,17 @@ public class UserAnswerServiceImpl implements UserAnswerService {
     private final UserAnswerRepository repository;
 
     @Override
-    public UserAnswerDto save(UserAnswerDto dto) {
+    public UserAnswerDto createUserAnswer(UserAnswerDto dto) {
 
         UserAnswer userAnswer = new UserAnswer();
 
-        User user = new User();
-        user.setId(Long.parseLong(dto.getUserId()));
-        userAnswer.setUser(user);
+        QuizSession quizSession = new QuizSession();
+        quizSession.setId(Long.parseLong(dto.getQuizSessionId()));
+        userAnswer.setQuizSession(quizSession);
 
-        GameSession gameSession = new GameSession();
-        gameSession.setId(Long.parseLong(dto.getGameSessionId()));
-        userAnswer.setGameSession(gameSession);
+        UserQuizSession userQuizSession = new UserQuizSession();
+        userQuizSession.setId(Long.parseLong(dto.getUserQuizSessionId()));
+        userAnswer.setUserQuizSession(userQuizSession);
 
         Quiz quiz = new Quiz();
         quiz.setId(Long.parseLong(dto.getQuizId()));
@@ -45,25 +43,5 @@ public class UserAnswerServiceImpl implements UserAnswerService {
         dto.setId(userAnswer.getId().toString());
 
         return dto;
-    }
-
-    @Override
-    public UserAnswerDto getById(String id) {
-        return null;
-    }
-
-    @Override
-    public List<UserAnswerDto> getAll() {
-        return null;
-    }
-
-    @Override
-    public boolean delete(UserAnswerDto entity) {
-        return false;
-    }
-
-    @Override
-    public boolean deleteById(String id) {
-        return false;
     }
 }

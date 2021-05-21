@@ -1,11 +1,13 @@
 package com.ulianoff.quizapplication.controller;
 
 import com.ulianoff.quizapplication.facade.QuizFacade;
-import com.ulianoff.quizapplication.model.dto.QuizDto;
+import com.ulianoff.quizapplication.model.dto.quiz.QuizDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -15,8 +17,8 @@ public class QuizController {
 
     private final QuizFacade quizFacade;
 
-    @GetMapping
-    public QuizDto getQuiz(@RequestParam("id") String id) {
+    @GetMapping("/{id}")
+    public QuizDto getQuizById(@PathVariable("id") String id) {
 
         log.debug(">>> get Quiz by id {}", id);
         return quizFacade.getQuizById(id);
@@ -27,5 +29,12 @@ public class QuizController {
 
         return quizFacade.addQuiz(quizDto);
     }
+
+    @GetMapping
+    public List<QuizDto> getAllQuiz(@RequestParam(value = "creatorId", required = false) String creatorId) {
+
+        return quizFacade.getAllQuiz(creatorId);
+    }
+
 
 }

@@ -1,4 +1,4 @@
-package com.ulianoff.quizapplication.model.dto;
+package com.ulianoff.quizapplication.model.dto.quiz;
 
 import lombok.Data;
 

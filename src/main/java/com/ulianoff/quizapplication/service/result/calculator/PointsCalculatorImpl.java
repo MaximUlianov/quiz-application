@@ -19,7 +19,7 @@ public class PointsCalculatorImpl implements PointsCalculator {
 
         Map<String, Integer> results = new HashMap<>();
         userAnswers.forEach(it -> {
-            String username = it.getUser().getUsername();
+            String username = it.getUserQuizSession().getUser().getUsername();
 
             if (!results.containsKey(username)) {
                 results.put(username, 0);

@@ -31,7 +31,7 @@ public class RoomFacadeImpl implements RoomFacade {
     @Transactional
     public RoomDto createRoom(RoomDto roomDto) {
 
-        roomService.save(roomDto);
+        roomService.createRoom(roomDto);
 
         return addUserToRoom(roomDto);
     }

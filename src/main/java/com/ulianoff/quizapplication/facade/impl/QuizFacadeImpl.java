@@ -1,17 +1,19 @@
 package com.ulianoff.quizapplication.facade.impl;
 
 import com.ulianoff.quizapplication.facade.QuizFacade;
-import com.ulianoff.quizapplication.model.dto.AnswerDto;
-import com.ulianoff.quizapplication.model.dto.QuestionDto;
-import com.ulianoff.quizapplication.model.dto.QuizDto;
+import com.ulianoff.quizapplication.model.dto.quiz.AnswerDto;
+import com.ulianoff.quizapplication.model.dto.quiz.QuestionDto;
+import com.ulianoff.quizapplication.model.dto.quiz.QuizDto;
 import com.ulianoff.quizapplication.service.answer.AnswerService;
 import com.ulianoff.quizapplication.service.question.QuestionService;
 import com.ulianoff.quizapplication.service.quiz.QuizService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -30,25 +32,33 @@ public class QuizFacadeImpl implements QuizFacade {
     public QuizDto addQuiz(QuizDto quizDto) {
 
         Set<QuestionDto> questions = quizDto.getQuestions();
-        quizService.save(quizDto);
+        quizService.createQuiz(quizDto);
 
         questions.forEach(question -> {
             Set<AnswerDto> answers = question.getAnswers();
             question.setQuizId(quizDto.getId());
-            questionService.save(question);
+            questionService.createQuestion(question);
 
             answers.forEach(answer -> {
                 answer.setQuestionId(question.getId());
-                answerService.save(answer);
+                answerService.createAnswer(answer);
             });
         });
         return quizDto;
     }
 
     @Override
-    @Transactional
     public QuizDto getQuizById(String id) {
 
-        return quizService.getById(id);
+        return quizService.getQuizById(id);
+    }
+
+    @Override
+    public List<QuizDto> getAllQuiz(String creatorId) {
+
+        if (StringUtils.isNotBlank(creatorId)) {
+
+        }
+        return null;
     }
 }

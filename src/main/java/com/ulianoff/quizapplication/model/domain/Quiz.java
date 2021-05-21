@@ -10,6 +10,7 @@ import java.util.Set;
 @Data
 @Table(name = "quiz", schema = "public")
 public class Quiz {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,4 +21,8 @@ public class Quiz {
     @EqualsAndHashCode.Exclude
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "quiz")
     private Set<Question> questions;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

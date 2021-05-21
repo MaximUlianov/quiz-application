@@ -7,4 +7,6 @@ import java.util.List;
 public interface ResultService {
 
     List<ResultDto> getAllGameSessionResults(String gameSessionId);
+
+    ResultDto getUserResultByUserSessionId(String userSessionId);
 }

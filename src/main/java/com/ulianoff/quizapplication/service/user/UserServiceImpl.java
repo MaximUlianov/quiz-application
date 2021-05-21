@@ -23,11 +23,6 @@ public class UserServiceImpl implements UserService {
     private final UserConverter converter;
 
     @Override
-    public UserDto save(UserDto userDto) {
-        return null;
-    }
-
-    @Override
     public UserDto createUser(UserDto userDto) {
 
         return saveUser(userDto, USER_ROLE_ID);
@@ -56,24 +51,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getById(String id) {
+    public UserDto getUserById(String id) {
 
         return converter.userToUserDto(repository.findById(Long.parseLong(id)).orElseThrow());
     }
 
     @Override
-    public List<UserDto> getAll() {
+    public void deleteUserById(String id) {
+
+    }
+
+    @Override
+    public List<UserDto> getAllUsers() {
         return null;
-    }
-
-    @Override
-    public boolean delete(UserDto entity) {
-        return false;
-    }
-
-    @Override
-    public boolean deleteById(String id) {
-        return false;
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.ulianoff.quizapplication.service.converter;
 
 import com.ulianoff.quizapplication.model.domain.Answer;
-import com.ulianoff.quizapplication.model.dto.AnswerDto;
+import com.ulianoff.quizapplication.model.dto.quiz.AnswerDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 

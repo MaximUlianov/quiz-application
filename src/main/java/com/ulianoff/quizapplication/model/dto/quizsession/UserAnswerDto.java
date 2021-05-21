@@ -1,4 +1,4 @@
-package com.ulianoff.quizapplication.model.dto;
+package com.ulianoff.quizapplication.model.dto.quizsession;
 
 import lombok.Data;
 
@@ -7,9 +7,9 @@ public class UserAnswerDto {
 
     private String id;
 
-    private String gameSessionId;
+    private String userQuizSessionId;
 
-    private String userId;
+    private String quizSessionId;
 
     private String quizId;
 

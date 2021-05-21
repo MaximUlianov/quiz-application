@@ -1,5 +1,6 @@
 package com.ulianoff.quizapplication.model.dto;
 
+import com.ulianoff.quizapplication.model.dto.quiz.QuizDto;
 import lombok.Data;
 
 import javax.validation.constraints.Max;

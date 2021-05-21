@@ -3,13 +3,10 @@ package com.ulianoff.quizapplication.service.answer;
 import com.ulianoff.quizapplication.dao.AnswerRepository;
 import com.ulianoff.quizapplication.model.domain.Answer;
 import com.ulianoff.quizapplication.model.domain.Question;
-import com.ulianoff.quizapplication.model.dto.AnswerDto;
-import com.ulianoff.quizapplication.service.answer.AnswerService;
+import com.ulianoff.quizapplication.model.dto.quiz.AnswerDto;
 import com.ulianoff.quizapplication.service.converter.AnswerConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -20,7 +17,7 @@ public class AnswerServiceImpl implements AnswerService {
     private final AnswerConverter converter;
 
     @Override
-    public AnswerDto save(AnswerDto answerDto) {
+    public AnswerDto createAnswer(AnswerDto answerDto) {
 
         Answer answer = converter.answerDtoToAnswer(answerDto);
 
@@ -33,25 +30,5 @@ public class AnswerServiceImpl implements AnswerService {
         answerDto.setId(String.valueOf(answer.getId()));
 
         return answerDto;
-    }
-
-    @Override
-    public AnswerDto getById(String id) {
-        return null;
-    }
-
-    @Override
-    public List<AnswerDto> getAll() {
-        return null;
-    }
-
-    @Override
-    public boolean delete(AnswerDto entity) {
-        return false;
-    }
-
-    @Override
-    public boolean deleteById(String id) {
-        return false;
     }
 }
