@@ -16,7 +16,7 @@ public class AuthenticationController {
     private final AuthService authService;
 
     @GetMapping("/{username}")
-    public AuthDto getAuthBuUsername(@PathVariable("username") String username) {
+    public AuthDto getAuthByUsername(@PathVariable("username") String username) {
 
         return authService.getAuthInfoByUsername(username);
     }

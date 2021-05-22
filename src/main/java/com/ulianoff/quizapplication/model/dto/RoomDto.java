@@ -20,15 +20,11 @@ public class RoomDto {
     @Max(10)
     private Integer capacity;
 
-    private String code;
-
     private boolean privateRoom;
 
     private String userId;
 
     private String quizId;
-
-    private QuizDto quiz;
 
     private Set<UserDto> users;
 }

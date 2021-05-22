@@ -1,5 +1,6 @@
 package com.ulianoff.quizapplication.model.dto;
 
+import com.ulianoff.quizapplication.model.enums.RoleEnum;
 import lombok.Data;
 
 @Data
@@ -12,6 +13,4 @@ public class UserDto {
     private String password;
 
     private String email;
-
-    private String roomId;
 }

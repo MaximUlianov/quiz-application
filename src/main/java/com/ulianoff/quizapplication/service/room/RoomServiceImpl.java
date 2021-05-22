@@ -26,12 +26,10 @@ public class RoomServiceImpl implements RoomService {
 
         Room room = converter.roomDtoToRoom(roomDto);
         room.setUsers(new HashSet<>());
-        room.setCode(RandomUtil.generateRandomCode());
 
         roomRepository.save(room);
 
         roomDto.setId(String.valueOf(room.getId()));
-        roomDto.setCode(room.getCode());
 
         return roomDto;
     }
@@ -59,12 +57,7 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public RoomDto addUserToRoom(RoomDto roomDto) {
 
-        Room room;
-        if (roomDto.getId() != null) {
-            room = roomRepository.findById(Long.parseLong(roomDto.getId())).orElseThrow();
-        } else {
-            room = roomRepository.findByCode(roomDto.getCode()).orElseThrow();
-        }
+        Room room = roomRepository.findById(Long.parseLong(roomDto.getId())).orElseThrow();
 
         User user = new User();
         user.setId(Long.parseLong(roomDto.getUserId()));

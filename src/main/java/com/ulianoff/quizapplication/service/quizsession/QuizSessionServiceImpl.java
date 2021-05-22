@@ -5,6 +5,7 @@ import com.ulianoff.quizapplication.model.domain.Quiz;
 import com.ulianoff.quizapplication.model.domain.QuizSession;
 import com.ulianoff.quizapplication.model.domain.Room;
 import com.ulianoff.quizapplication.model.domain.User;
+import com.ulianoff.quizapplication.model.dto.RoomDto;
 import com.ulianoff.quizapplication.model.dto.quiz.QuizDto;
 import com.ulianoff.quizapplication.model.dto.quizsession.JoinQuizSessionDto;
 import com.ulianoff.quizapplication.model.dto.quizsession.QuizSessionCreationDto;
@@ -14,6 +15,7 @@ import com.ulianoff.quizapplication.model.dto.quizsession.usersession.UserQuizDt
 import com.ulianoff.quizapplication.model.dto.quizsession.usersession.UserQuizSessionDto;
 import com.ulianoff.quizapplication.service.converter.QuizConverter;
 import com.ulianoff.quizapplication.service.result.ResultService;
+import com.ulianoff.quizapplication.service.room.RoomService;
 import com.ulianoff.quizapplication.service.userquizsession.UserQuizSessionService;
 import com.ulianoff.quizapplication.util.RandomUtil;
 import lombok.RequiredArgsConstructor;
@@ -38,6 +40,8 @@ public class QuizSessionServiceImpl implements QuizSessionService {
     private final QuizConverter quizConverter;
 
     private final ResultService resultService;
+
+    private final RoomService roomService;
 
     @Override
     public QuizSessionInfoDto createQuizSession(QuizSessionCreationDto dto) {
@@ -79,6 +83,7 @@ public class QuizSessionServiceImpl implements QuizSessionService {
                 .quizId(String.valueOf(quiz.getId()))
                 .quizTitle(quiz.getTitle())
                 .usersStatus(usersStatus)
+                .code(quizSession.getCode())
                 .build();
     }
 
@@ -96,6 +101,12 @@ public class QuizSessionServiceImpl implements QuizSessionService {
     public UserQuizDto joinUserToQuizSession(JoinQuizSessionDto dto) {
 
         QuizSession quizSession = repository.findByCode(dto.getQuizSessionCode()).orElseThrow();
+
+        RoomDto roomDto = new RoomDto();
+        roomDto.setId(quizSession.getRoom().getId().toString());
+        roomDto.setUserId(dto.getUserId());
+        roomService.addUserToRoom(roomDto);
+
 
         QuizDto quizDto = quizConverter.quizToQuizDto(quizSession.getQuiz());
 

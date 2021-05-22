@@ -42,7 +42,6 @@ public class RoomController {
     @PatchMapping
     public RoomDto addUserToRoom(@RequestBody RoomDto roomDto) {
 
-        log.info(">>> adding user with id {} to room with code {}", roomDto.getUserId(), roomDto.getCode());
         return service.addUserToRoom(roomDto);
     }
 

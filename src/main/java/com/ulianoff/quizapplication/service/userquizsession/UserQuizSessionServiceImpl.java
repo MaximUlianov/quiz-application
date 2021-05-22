@@ -63,7 +63,7 @@ public class UserQuizSessionServiceImpl implements UserQuizSessionService {
                 .userId(String.valueOf(model.getUser().getId()))
                 .username(model.getUser().getUsername())
                 .startTimestamp(model.getStartTimestamp().toString())
-                .endTimestamp(model.getEndTimestamp().toString())
+                .endTimestamp(model.getEndTimestamp() != null ? model.getEndTimestamp().toString() : null)
                 .quizSessionId(String.valueOf(model.getQuizSession().getId()))
                 .build();
     }

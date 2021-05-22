@@ -15,5 +15,7 @@ public class QuizSessionInfoDto {
 
     private String quizTitle;
 
+    private String code;
+
     private List<UserQuizStatusDto> usersStatus;
 }
